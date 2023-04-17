@@ -36,15 +36,20 @@ def main():
         '''
 
 
+# attributes are 
     with col2:
         st.subheader(" Find out the most suitable crop to grow in your farm 👨‍🌾")
-        N = st.number_input("Nitrogen", 1,10000)
-        P = st.number_input("Phosporus", 1,10000)
-        K = st.number_input("Potassium", 1,10000)
-        temp = st.number_input("Temperature",0.0,100000.0)
-        humidity = st.number_input("Humidity in %", 0.0,100000.0)
-        ph = st.number_input("Ph", 0.0,100000.0)
-        rainfall = st.number_input("Rainfall in mm",0.0,100000.0)
+        gender = st.radio("Gender", ['Male','Female'])
+        married = st.radio("Married", ['Yes','No'])
+        dependents = st.radio("Dependents", ['0','1','2','3'])
+        education = st.radio("Education", ['Graduate','Not Graduate'])
+        employed = st.radio("Self Employed", ['Yes','No'])
+        propertyArea = st.radio("Property Area", ['Semiurban','Urban'])
+        applicantIncome = st.number_input("Applicant Income", 150.0,100000.0)
+        coApplicantIncome = st.number_input("Co Applicant Income", 0.0,50000.0)
+        loanAmount = st.number_input("Loan Amount", 10.0,1000.0)
+        loanAmountTerm = st.number_input("Loan Amount Term", 10.0,600.0)
+        creditHistory = st.number_input("Credit History", 0.0,1.0)
 
         feature_list = [N, P, K, temp, humidity, ph, rainfall]
         single_pred = np.array(feature_list).reshape(1,-1)
