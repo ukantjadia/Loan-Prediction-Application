@@ -51,7 +51,7 @@ def main():
         loanAmountTerm = st.number_input("Loan Amount Term", 10.0,600.0)
         creditHistory = st.number_input("Credit History", 0.0,1.0)
 
-        feature_list = [N, P, K, temp, humidity, ph, rainfall]
+        feature_list = [gender, married, dependents, education, employed, propertyArea, applicantIncome, coApplicantIncome, loanAmount, loanAmountTerm, creditHistory]
         single_pred = np.array(feature_list).reshape(1,-1)
         
         if st.button('Predict'):
