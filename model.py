@@ -1,7 +1,6 @@
-import streamlit as st 
 import pandas as pd 
-import numpy as np
-import pickle4 as pickle
+# import pickle
+import joblib
 ## Preparing model
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -10,7 +9,8 @@ model = LogisticRegression(random_state=42)
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
 ## Collecting the dataset
-df = pd.read_csv("train_u6lujuX_CVtuZ9i.csv")
+URL = "https://raw.githubusercontent.com/ukantjadia/Loan-Prediction/Main/Data/train_u6lujuX_CVtuZ9i.csv"
+df = pd.read_csv(URL)
 # df = pd.read_csv("../Data/train_u6lujuX_CVtuZ9i.csv")
 ## Droping the Loan id 
 df.drop('Loan_ID',axis=1,inplace=True)
@@ -57,9 +57,8 @@ y_pred = model.predict(X_test)
 from sklearn.metrics import accuracy_score
 acc = accuracy_score(y_test,y_pred)
 print(acc)
-print(X)
 
 ## Saving moodel
-# save_model(model,'model.pkl')
+joblib.dump(model,'model.sav')
 
 
