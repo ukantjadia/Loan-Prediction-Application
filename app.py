@@ -4,22 +4,20 @@ import numpy as np
 import os
 import pickle
 import warnings
+import joblib
 
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
 
-
-# st.beta_set_page_config(page_title="Crop Recommender", page_icon="🌿", layout='centered', initial_sidebar_state="collapsed")
-
 def load_model(modelfile):
-	loaded_model = pickle.load(open(modelfile, 'rb'))
-	return loaded_model
+    loaded_model = joblib.load(modelfile)
+    return loaded_model
 
 def main():
     # title
     html_temp = """
     <div>
-    <h1 style="color:MEDIUMSEAGREEN;text-align:left;"> Crop Recommendation  🌱 </h1>
+    <h1 style="color:MEDIUMSEAGREEN;text-align:left;"> Loan Prediction 💴🏦 </h1>
     </div>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
@@ -27,16 +25,29 @@ def main():
     col1,col2  = st.columns([2,2])
     
     with col1: 
+        st.sidebar.write(""" ## How does it work ❓
+                         
+The loan approval prediction model uses your credit score, income, education, loan amount and other various factor  to determine whether your loan will be approved or not.  It outputs a "yes" or "no" decision.
+                """)
         with st.sidebar.expander(" ℹ️ Information", expanded=True):
             st.write("""
-            Crop recommendation is one of the most important aspects of precision agriculture. Crop recommendations are based on a number of factors. Precision agriculture seeks to define these criteria on a site-by-site basis in order to address crop selection issues. While the "site-specific" methodology has improved performance, there is still a need to monitor the systems' outcomes.Precision agriculture systems aren't all created equal. 
-            However, in agriculture, it is critical that the recommendations made are correct and precise, as errors can result in significant material and capital loss.
-
+                    Loan Prediction is very helpful for employee of banks 
+                    as well as for the applicant also.
+                    Dream housing Finance Company 
+                    deals in all loans. They have presence across all urban, 
+                    semi urban and rural areas. Customer first apply for loan 
+                    after that company or bank validates the customer 
+                    eligibility for loan. Company or bank wants to automate 
+                    the loan eligibility process (real time) based on customer 
+                    details provided while filling application form. These 
+                    details are Gender, Marital Status, Education, Number of 
+                    Dependents, Income, Loan Amount, Credit History and 
+                    other
             """)
-        '''
-        ## How does it work ❓ 
-        Complete all the parameters and the machine learning model will predict the most suitable crops to grow in a particular farm based on various parameters
-        '''
+
+            gender = st.radio("Gender", ['Male','Female'])
+            married = st.radio("Married", ['Yes','No'])
+            dependents = st.radio("Dependents", ['0','1','2','3'])
 
 
 # attributes are 
@@ -44,9 +55,6 @@ def main():
         st.subheader(" Find out the most suitable crop to grow in your farm 👨‍🌾")
         col3,col4  = st.columns([2,2])
         with col3:
-            gender = st.radio("Gender", ['Male','Female'])
-            married = st.radio("Married", ['Yes','No'])
-            dependents = st.radio("Dependents", ['0','1','2','3'])
             applicantIncome = st.number_input("Applicant Income", 150.0,100000.0)
             coApplicantIncome = st.number_input("Co Applicant Income", 0.0,50000.0)
             loanAmount = st.number_input("Loan Amount", 10.0,1000.0)
@@ -55,7 +63,7 @@ def main():
             employed = st.radio("Self Employed", ['Yes','No'])
             propertyArea = st.radio("Property Area", ['Semiurban','Urban'])
             loanAmountTerm = st.number_input("Loan Amount Term", 10.0,600.0)
-            creditHistory = st.radio("Credit History", ['0','1','2','3'])
+            creditHistory = str(st.slider("Credit History",1,3000))
 
             num_data = [applicantIncome, coApplicantIncome, loanAmount, loanAmountTerm]
             cat_data = [gender, married, dependents, education, employed,creditHistory, propertyArea]
@@ -66,7 +74,7 @@ def main():
         single_pred = np.array(feature_list).reshape(1,-1)
         
         if st.button('Predict'):
-            loaded_model = load_model('model.pkl')
+            loaded_model = load_model('model.sav')
             prediction = loaded_model.predict(single_pred)
             col1.write('''
 		    ## Results 🔍 
