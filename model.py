@@ -10,7 +10,8 @@ model = LogisticRegression(random_state=42)
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
 ## Collecting the dataset
-df = pd.read_csv("../Data/train_u6lujuX_CVtuZ9i.csv")
+df = pd.read_csv("train_u6lujuX_CVtuZ9i.csv")
+# df = pd.read_csv("../Data/train_u6lujuX_CVtuZ9i.csv")
 ## Droping the Loan id 
 df.drop('Loan_ID',axis=1,inplace=True)
 
@@ -33,7 +34,7 @@ Tnum_data = pd.DataFrame(Tnum_data).T
 ### categorical data
 Tcat_data = Tcat_data.apply(lambda x: x.fillna(x.value_counts().index[0]))
 ### Numerical data
-Tnum_data = Tnum_data.fillna(method='bfill',inplace=True)
+Tnum_data.fillna(method='bfill',inplace=True)
 
 ## Transforming the categorical data
 target_values = {'Y':0,'N':1}
@@ -44,10 +45,8 @@ target = target.map(target_values)
 Transform_cat_data = pd.DataFrame()
 for data in Tcat_data:
     Transform_cat_data[data] = le.fit_transform(Tcat_data[data])
-
 X = pd.concat([Tnum_data,Transform_cat_data],axis=1)
 y = target
-
 ## Spliting the dataset for training and testing
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
 ## Training and testing the dataset
@@ -58,8 +57,9 @@ y_pred = model.predict(X_test)
 from sklearn.metrics import accuracy_score
 acc = accuracy_score(y_test,y_pred)
 print(acc)
+print(X)
 
 ## Saving moodel
-save_model(model,'model.pkl')
+# save_model(model,'model.pkl')
 
 
