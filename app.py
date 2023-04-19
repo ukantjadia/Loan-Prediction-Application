@@ -68,10 +68,10 @@ The loan approval prediction model uses your credit score, income, education, lo
             num_data = [applicantIncome, coApplicantIncome, loanAmount, loanAmountTerm]
             cat_data = [gender, married, dependents, education, employed,creditHistory, propertyArea]
             test=[]
-            test = le.fit_transform(cat_data)
-
-        feature_list = num_data + cat_data
-        single_pred = np.array(feature_list).reshape(1,-1)
+            test = list(le.fit_transform(cat_data))
+            feature_list = num_data + test
+            single_pred = np.array(feature_list).reshape(1,-1)
+        
         
         if st.button('Predict'):
             loaded_model = load_model('model.sav')
@@ -79,10 +79,15 @@ The loan approval prediction model uses your credit score, income, education, lo
             col1.write('''
 		    ## Results 🔍 
 		    ''')
-            col1.success(f"{prediction.item().title()} are recommended by the A.I for your farm.")
+            if prediction[0] == "0":
+                st.write("Yes")
+            else: 
+                st.write("No")
+            # st.write(prediction[0])
+            col1.success(f"{prediction} are recommended by the A.I for your farm.")
       #code for html ☘️ 🌾 🌳 👨‍🌾  🍃
 
-    st.warning("Note: This A.I application is for educational/demo purposes only and cannot be relied upon. Check the source code [here](https://github.com/gabbygab1233/Crop-Recommendation)")
+    # st.warning("Note: This A.I application is for educational/demo purposes only and cannot be relied upon. Check the source code [here](https://github.com/gabbygab1233/Crop-Recommendation)")
     hide_menu_style = """
     <style>
     #MainMenu {visibility: hidden;}
