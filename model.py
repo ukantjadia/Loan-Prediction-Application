@@ -1,5 +1,5 @@
 import pandas as pd 
-# import pickle
+import numpy as np
 import joblib
 ## Preparing model
 from sklearn.model_selection import train_test_split
@@ -50,14 +50,16 @@ y = target
 ## Spliting the dataset for training and testing
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
 ## Training and testing the dataset
-model.fit(X_train,y_train)    
+model.fit(X_train.values,y_train.values)    
 y_pred = model.predict(X_test)
-
+test1 = []
 ## Calculating accuracy score
 from sklearn.metrics import accuracy_score
 acc = accuracy_score(y_test,y_pred)
-print(acc)
-
+# print(acc)
+test = [ 4887, 0, 133, 360, 2, 6, 0, 4, 3, 1, 5 ]
+test2 = np.array(test).reshape(1,-1)
+print(model.predict(test2))
 ## Saving moodel
 joblib.dump(model,'model.sav')
 

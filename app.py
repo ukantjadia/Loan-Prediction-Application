@@ -67,19 +67,23 @@ The loan approval prediction model uses your credit score, income, education, lo
             num_data = [applicantIncome, coApplicantIncome, loanAmount, loanAmountTerm]
             cat_data = [gender, married, dependents, education, employed,creditHistory, propertyArea]
             test=[]
-            test = list(le.fit_transform(cat_data))
+            column=['applicagoinIncome','coApplicantIncome','loanAmount','loanAmountTrem','gender','married','dependent','education','employed','creditHistory','propertyArea']
+            test = le.fit_transform(cat_data).tolist()
             feature_list = num_data + test
+            # df = pd.DataFrame([feature_list],columns=column)
             single_pred = np.array(feature_list).reshape(1,-1)
-        
+            # single_pred = np.array(feature_list)
+            st.write(feature_list) 
             loaded_model = load_model('model.sav')
             prediction = loaded_model.predict(single_pred)
-            col1.write('''
+            st.write('''
 		    ## Results 🔍 
 		    ''')
-            if prediction[0] == "0":
-                st.write("Yes")
-            else: 
-                st.write("No")
+            st.write(prediction)
+            # if prediction[0] == "0":
+            #     st.write("Yes")
+            # else: 
+            #     st.write("No")
 
         #     col1.success(f"{prediction} are recommended by the A.I for your farm.")
       #code for html ☘️ 🌾 🌳 👨‍🌾  🍃
