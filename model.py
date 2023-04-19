@@ -56,10 +56,10 @@ test1 = []
 ## Calculating accuracy score
 from sklearn.metrics import accuracy_score
 acc = accuracy_score(y_test,y_pred)
-# print(acc)
-test = [ 4887, 0, 133, 360, 2, 6, 0, 4, 3, 1, 5 ]
-test2 = np.array(test).reshape(1,-1)
-print(model.predict(test2))
+print(acc)
+# test = [ 4887, 0, 133, 360, 2, 6, 0, 4, 3, 1, 5 ]
+# test2 = np.array(test).reshape(1,-1)
+# print(model.predict(test2))
 ## Saving moodel
 joblib.dump(model,'model.sav')
 

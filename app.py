@@ -1,8 +1,6 @@
 import streamlit as st 
 import pandas as pd
 import numpy as np
-import os
-import pickle
 import warnings
 import joblib
 
@@ -26,8 +24,31 @@ def main():
 The loan approval prediction model uses your credit score, income, education, loan amount and other various factor  to determine whether your loan will be approved or not.  It outputs a "yes" or "no" decision.
                 """)
     
-
     with st.sidebar.expander(" ℹ️ Information", expanded=True):
+        st.write("""
+**Applicant income**: This refers to the amount of money that the person applying for the loan earns on a regular basis.
+
+**Co-applicant income**: If the loan applicant has a co-applicant (such as a spouse or partner), their income will also be taken into consideration by the lender.
+
+**Loan amount**: This is the total amount of money that the loan applicant is requesting to borrow.
+
+**Loan amount term**: This refers to the length of time over which the loan will be repaid.
+
+**Gender**: This is the loan applicant's gender, which is recorded for statistical purposes only. 
+
+**Married**: This refers to the loan applicant's marital status. Lenders may use this information to evaluate the applicant's financial stability and ability to repay the loan.
+
+**Dependents**: This refers to the number of people that the loan applicant supports financially (such as children or elderly parents).
+
+**Education**: This refers to the loan applicant's level of education.
+
+**Employed**: This refers to the loan applicant's employment status.
+
+**Credit history**: This refers to the loan applicant's past credit behavior, including any loans or credit cards they may have had in the past.
+        """)
+
+
+    with st.expander(" ℹ️ About", expanded=True):
         st.write("""
                 Loan Prediction is very helpful for employee of banks 
                 as well as for the applicant also.
@@ -79,20 +100,12 @@ The loan approval prediction model uses your credit score, income, education, lo
             st.write('''
 		    ## Results 🔍 
 		    ''')
-            st.write(prediction)
-            # if prediction[0] == "0":
-            #     st.write("Yes")
-            # else: 
-            #     st.write("No")
+            if prediction[0] == "0":
+                st.write("Yes")
+            else: 
+                st.write("No")
 
-        #     col1.success(f"{prediction} are recommended by the A.I for your farm.")
-      #code for html ☘️ 🌾 🌳 👨‍🌾  🍃
 
-    hide_menu_style = """
-    <style>
-    #MainMenu {visibility: hidden;}
-    </style>
-    """
 
 hide_menu_style = """
         <style>
