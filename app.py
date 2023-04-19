@@ -16,7 +16,7 @@ def main():
     # title
     html_temp = """
     <div>
-    <h1 style="color:MEDIUMSEAGREEN;text-align:left;"> Loan Prediction 💴🏦 </h1>
+    <h1 style="color:MEDIUMSEAGREEN;text-align:left;"> Loan Approval Prediction 💵🏦 </h1>
     </div>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
@@ -95,7 +95,7 @@ The loan approval prediction model uses your credit score, income, education, lo
             # df = pd.DataFrame([feature_list],columns=column)
             single_pred = np.array(feature_list).reshape(1,-1)
             # single_pred = np.array(feature_list)
-            st.write(feature_list) 
+            # st.write(feature_list) 
             loaded_model = load_model('model.sav')
             prediction = loaded_model.predict(single_pred)
             st.write('''
@@ -142,7 +142,7 @@ text-align: center;
 }
 </style>
 <div class="footer">
-<p>Developed with ❤ by <a style='display: block; text-align: center;' href="https://ukantjadia.me/linkedin" target="_blank">Ukant Jadia & Aatmgyaa Upadhyay</a></p>
+<p>Developed with ❤ by <a style='display: block; text-align: center;' href="https://ukantjadia.me/linkedin" target="_blank">Ukant Jadia & Aatmagyay Upadhyay</a></p>
 </div>
 """
 st.markdown(footer,unsafe_allow_html=True)

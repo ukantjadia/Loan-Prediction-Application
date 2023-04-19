@@ -50,14 +50,15 @@ y = target
 ## Spliting the dataset for training and testing
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
 ## Training and testing the dataset
-model.fit(X_train.values,y_train.values)    
+model.fit(X_train,y_train)    
 y_pred = model.predict(X_test)
-test1 = []
 ## Calculating accuracy score
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score,f1_score
 acc = accuracy_score(y_test,y_pred)
-print(acc)
+print("Test Accuracy: ",accuracy_score(y_test,y_pred))
+print("Test F1 Score: ",f1_score(y_test,y_pred))
 # test = [ 4887, 0, 133, 360, 2, 6, 0, 4, 3, 1, 5 ]
+# import numpy as np 
 # test2 = np.array(test).reshape(1,-1)
 # print(model.predict(test2))
 ## Saving moodel
