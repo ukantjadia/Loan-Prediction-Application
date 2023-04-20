@@ -102,9 +102,9 @@ The loan approval prediction model uses your credit score, income, education, lo
 		    ## Results 🔍 
 		    ''')
             if prediction[0] == "0":
-                st.write("Yes")
+                st.write("Your Loan will get Approved.")
             else: 
-                st.write("No")
+                st.write("Your Loan will not get Approved.")
 
 
 
