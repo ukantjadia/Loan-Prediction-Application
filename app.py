@@ -1,9 +1,7 @@
 import streamlit as st 
 import pandas as pd
 import numpy as np
-import warnings
 import joblib
-
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
 
@@ -115,6 +113,8 @@ hide_menu_style = """
         """
 st.markdown(hide_menu_style, unsafe_allow_html=True)
 
+
+
 if __name__ == '__main__':
 	main()
 
@@ -146,3 +146,5 @@ text-align: center;
 </div>
 """
 st.markdown(footer,unsafe_allow_html=True)
+
+
